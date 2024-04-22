@@ -3,37 +3,43 @@ import { useEffect, useState } from 'react';
 import { decodeToken } from 'react-jwt';
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useStore } from './Store/StoreData';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { DescomprimirToken } from './Functions/Descomprimir';
 export const LeerToken = () => {
 	const [open, setOpen] = useState(true);
 	const navigate = useNavigate();
 	useEffect(() => {
 		const Verificar = async () => {
 			try {
-				const cookieString = document.cookie;
-				let token = null;
-				console.log('cookie', cookieString);
-				if (cookieString) {
-					const cookieParts = cookieString.split('; ');
-					const tokenRow = cookieParts.find((row) => row.startsWith('token='));
+				// const cookieString = document.cookie;
+				// let token = null;
+				// console.log('cookie', cookieString);
+				// if (cookieString) {
+				// 	const cookieParts = cookieString.split('; ');
+				// 	const tokenRow = cookieParts.find((row) => row.startsWith('token='));
 
-					if (tokenRow) {
-						token = tokenRow.split('=')[1];
-					} else {
-						// window.location.href = 'http://localhost:5173/';
-						window.location.href = 'https://login-mg.vercel.app/';
+				// 	if (tokenRow) {
+				// 		token = tokenRow.split('=')[1];
+				// 	} else {
+				// 		// window.location.href = 'http://localhost:5173/';
+				// 		window.location.href = 'https://login-mg.vercel.app/';
 
-						throw new Error('Cookie "token" no encontrada');
-					}
-				} else {
-					// window.location.href = 'http://localhost:5173/';
-					window.location.href = 'https://login-mg.vercel.app/';
+				// 		throw new Error('Cookie "token" no encontrada');
+				// 	}
+				// } else {
+				// 	// window.location.href = 'http://localhost:5173/';
+				// 	window.location.href = 'https://login-mg.vercel.app/';
 
-					throw new Error('No se encontró ninguna cookie');
-				}
+				// 	throw new Error('No se encontró ninguna cookie');
+				// }
+				const location = useLocation(); // Obtiene la ubicación actual del componente
+				const searchParams = new URLSearchParams(location.search); // Crea un objeto URLSearchParams con los parámetros de la URL
+				const token = searchParams.get('token');
+				const tokenValido = DescomprimirToken(token);
+				console.log('token url', tokenValido);
 
 				const param = {
-					accessToken: token,
+					accessToken: tokenValido,
 				};
 
 				const response = await fetch('https://app-prod-eastus-portalevaluador-api.azurewebsites.net/api/Procesos/VerificarToken', {
