@@ -10,73 +10,46 @@ export const LeerToken = () => {
 	const navigate = useNavigate();
 	useEffect(() => {
 		const Verificar = async () => {
-			try {
-				// const cookieString = document.cookie;
-				// let token = null;
-				// console.log('cookie', cookieString);
-				// if (cookieString) {
-				// 	const cookieParts = cookieString.split('; ');
-				// 	const tokenRow = cookieParts.find((row) => row.startsWith('token='));
+			const location = useLocation();
+			const searchParams = new URLSearchParams(location.search);
+			const token = searchParams.get('token');
+			console.log('token', token);
+			const tokenValido = DescomprimirToken(token);
+			console.log('token url', tokenValido);
 
-				// 	if (tokenRow) {
-				// 		token = tokenRow.split('=')[1];
-				// 	} else {
-				// 		// window.location.href = 'http://localhost:5173/';
-				// 		window.location.href = 'https://login-mg.vercel.app/';
+			const param = {
+				accessToken: tokenValido,
+			};
 
-				// 		throw new Error('Cookie "token" no encontrada');
-				// 	}
-				// } else {
-				// 	// window.location.href = 'http://localhost:5173/';
-				// 	window.location.href = 'https://login-mg.vercel.app/';
+			const response = await fetch('https://app-prod-eastus-portalevaluador-api.azurewebsites.net/api/Procesos/VerificarToken', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(param),
+			});
 
-				// 	throw new Error('No se encontró ninguna cookie');
-				// }
-				const location = useLocation(); // Obtiene la ubicación actual del componente
-				const searchParams = new URLSearchParams(location.search); // Crea un objeto URLSearchParams con los parámetros de la URL
-				const token = searchParams.get('token');
-				const tokenValido = DescomprimirToken(token);
-				console.log('token url', tokenValido);
+			const result = await response.json();
+			const { isExitoso } = result;
 
-				const param = {
-					accessToken: tokenValido,
-				};
+			if (isExitoso) {
+				const decode = decodeToken(token);
+				useStore.getState().setRun(decode.Run);
+				useStore.getState().setRol(decode.role);
+				useStore.getState().setName(decode.Nombre + ' ' + decode.Apellido);
+				useStore.getState().setIdUsuario(decode.IdUsuario);
+				localStorage.setItem('token', token);
 
-				const response = await fetch('https://app-prod-eastus-portalevaluador-api.azurewebsites.net/api/Procesos/VerificarToken', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(param),
-				});
-
-				const result = await response.json();
-				const { isExitoso } = result;
-
-				if (isExitoso) {
-					const decode = decodeToken(token);
-					useStore.getState().setRun(decode.Run);
-					useStore.getState().setRol(decode.role);
-					useStore.getState().setName(decode.Nombre + ' ' + decode.Apellido);
-					useStore.getState().setIdUsuario(decode.IdUsuario);
-					localStorage.setItem('token', token);
-					document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-
-					if (decode.role === '8') {
-						navigate('/planificar-pct');
-					} else if (decode.role === '9') {
-						navigate('/prueba-pct');
-					}
-				} else {
-					setOpen(false);
-					const error = 'error';
-					document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-					document.cookie = `invalid=${error}; path=/; SameSite=None; Secure`;
-					window.location.href = 'https://login-mg.vercel.app/';
-					// window.location.href = 'http://localhost:5173/';
+				if (decode.role === '8') {
+					navigate('/planificar-pct');
+				} else if (decode.role === '9') {
+					navigate('/prueba-pct');
 				}
-			} catch (error) {
-				console.error('Error al verificar el token:', error);
+			} else {
+				setOpen(false);
+				const error = 'error';
+				window.location.href = 'https://login-mg.vercel.app/';
+				// window.location.href = 'http://localhost:5173/';
 			}
 		};
 
