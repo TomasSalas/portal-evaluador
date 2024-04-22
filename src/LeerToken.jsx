@@ -13,9 +13,9 @@ export const LeerToken = () => {
 			const searchParams = new URLSearchParams(window.location.search);
 			const token = searchParams.get('token');
 			console.log('token', token);
-
+			const tokenDecodificado = token.replace(/ /g, '+');
 			// Descomprime el token
-			const tokenValido = DescomprimirToken(token);
+			const tokenValido = DescomprimirToken(tokenDecodificado);
 			console.log('token url', tokenValido);
 
 			const param = {
