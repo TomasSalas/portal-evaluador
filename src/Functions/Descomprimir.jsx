@@ -1,6 +1,6 @@
 import pako from 'pako';
 
-export const DescomprimirToken = (tokenComprimidoBase64) => {
+export const DescomprimirToken = ({ tokenComprimidoBase64 }) => {
 	const tokenComprimido = new Uint8Array(
 		atob(tokenComprimidoBase64)
 			.split('')
