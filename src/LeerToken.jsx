@@ -3,17 +3,18 @@ import { useEffect, useState } from 'react';
 import { decodeToken } from 'react-jwt';
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useStore } from './Store/StoreData';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DescomprimirToken } from './Functions/Descomprimir';
 export const LeerToken = () => {
 	const [open, setOpen] = useState(true);
 	const navigate = useNavigate();
 	useEffect(() => {
 		const Verificar = async () => {
-			const location = useLocation();
-			const searchParams = new URLSearchParams(location.search);
+			const searchParams = new URLSearchParams(window.location.search);
 			const token = searchParams.get('token');
 			console.log('token', token);
+
+			// Descomprime el token
 			const tokenValido = DescomprimirToken(token);
 			console.log('token url', tokenValido);
 
