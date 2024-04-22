@@ -12,6 +12,7 @@ export const LeerToken = () => {
 			try {
 				const cookieString = document.cookie;
 				let token = null;
+				console.log(cookieString);
 				if (cookieString) {
 					const cookieParts = cookieString.split('; ');
 					const tokenRow = cookieParts.find((row) => row.startsWith('token='));
