@@ -331,10 +331,11 @@ function Navbar(props) {
 										alignItems: 'flex-start',
 									}}
 								>
-									<MenuItem component={Link} to="/mi-cuenta">
+									<MenuItem component={Link} to="/mi-cuenta" sx={{ width: '100%' }}>
 										<Button
 											sx={{
 												color: locationForm.pathname === '/mi-cuenta' ? '#0063F7' : 'black',
+												width: '100%',
 											}}
 										>
 											Mi Cuenta
