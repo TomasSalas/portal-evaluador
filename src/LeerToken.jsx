@@ -19,7 +19,7 @@ export const LeerToken = () => {
 
 			if (!idToken) {
 				setOpen(false);
-				//window.location.href = 'https://login-mg.vercel.app/';
+				window.location.href = 'https://login-mg.vercel.app/';
 				//window.location.href = 'http://localhost:5173/';
 
 				return;
@@ -31,7 +31,6 @@ export const LeerToken = () => {
 				token = data[0].accessToken;
 			} else {
 				window.location.href = 'https://login-mg.vercel.app/';
-
 				//return (window.location.href = 'http://localhost:5173/');
 			}
 			const param = {
