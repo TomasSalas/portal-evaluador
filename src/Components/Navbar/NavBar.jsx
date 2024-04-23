@@ -64,8 +64,8 @@ function Navbar(props) {
 	const handleLogout = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('userData');
-		return (window.location.href = 'http://localhost:5173/');
-		//window.location.href = 'https://login-mg.vercel.app/';
+		//return (window.location.href = 'http://localhost:5173/');
+		return (window.location.href = 'https://login-mg.vercel.app/');
 	};
 
 	// const miCuenta = () => {
