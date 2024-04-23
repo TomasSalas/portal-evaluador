@@ -18,11 +18,13 @@ export const LeerToken = () => {
 
 			if (!idToken) {
 				setOpen(false);
+				window.location.href = 'https://login-mg.vercel.app/';
+
 				return;
 			}
 
 			const { error, data } = await ConsultarToken(idToken);
-			console.log(data);
+
 			if (!error) {
 				const token = data[0].accessToken;
 
