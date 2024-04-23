@@ -41,7 +41,7 @@ export const LeerToken = () => {
 				});
 
 				const result = await response.json();
-				console.log(result);
+
 				const { isExitoso } = result;
 
 				if (isExitoso) {
