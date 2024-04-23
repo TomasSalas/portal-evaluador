@@ -64,11 +64,8 @@ function Navbar(props) {
 	const handleLogout = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('userData');
-		document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-		// const error = 'error';
-		// document.cookie = `invalid=${error}; path=/; samesite=strict`;
-		//window.location.href = 'http://localhost:5173/';
-		window.location.href = 'https://login-mg.vercel.app/';
+		return (window.location.href = 'http://localhost:5173/');
+		//window.location.href = 'https://login-mg.vercel.app/';
 	};
 
 	// const miCuenta = () => {

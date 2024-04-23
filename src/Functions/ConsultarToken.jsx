@@ -1,6 +1,6 @@
 export const ConsultarToken = async (id) => {
 	try {
-		const url = '' + id;
+		const url = 'https://app-prod-eastus-portalevaluador-api.azurewebsites.net/api/Candidato/BuscarAccessToken?RandomId=' + id;
 
 		const res = await fetch(url, {
 			method: 'GET',
