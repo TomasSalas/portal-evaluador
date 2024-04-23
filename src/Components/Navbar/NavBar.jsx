@@ -72,7 +72,7 @@ function Navbar(props) {
 	//   navigate("/mi-cuenta");
 	// };
 
-	const location = useLocation();
+	const locationForm = useLocation();
 
 	const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -126,7 +126,7 @@ function Navbar(props) {
 										sx={{
 											color:
 												rol === 'administrador' &&
-												(location.pathname === '/agregar-usuarios' || location.pathname === '/listar-usuarios' ? '#0063F7' : 'black'),
+												(locationForm.pathname === '/agregar-usuarios' || locationForm.pathname === '/listar-usuarios' ? '#0063F7' : 'black'),
 										}}
 									>
 										Usuarios
@@ -146,7 +146,7 @@ function Navbar(props) {
 												<MenuItem onClick={handleMenuCloseCerrar3} component={Link} to={item.path}>
 													<Button
 														sx={{
-															color: location.pathname === item.path ? '#0063F7' : 'black',
+															color: locationForm.pathname === item.path ? '#0063F7' : 'black',
 														}}
 													>
 														{item.label}
@@ -163,7 +163,7 @@ function Navbar(props) {
 										<Link to={item.path} key={`evaluador_${item.label}`}>
 											<Button
 												sx={{
-													color: location.pathname === item.path ? '#0063F7' : 'black',
+													color: locationForm.pathname === item.path ? '#0063F7' : 'black',
 													padding: 1,
 												}}
 											>
@@ -180,7 +180,7 @@ function Navbar(props) {
 										<Link to={item.path} key={`evaluador_${item.label}`}>
 											<Button
 												sx={{
-													color: location.pathname === item.path ? '#0063F7' : 'black',
+													color: locationForm.pathname === item.path ? '#0063F7' : 'black',
 													padding: 1,
 												}}
 											>
@@ -197,7 +197,7 @@ function Navbar(props) {
 										<Link to={item.path} key={`evaluador_${item.label}`}>
 											<Button
 												sx={{
-													color: location.pathname === item.path ? '#0063F7' : 'black',
+													color: locationForm.pathname === item.path ? '#0063F7' : 'black',
 													padding: 1,
 												}}
 											>
@@ -264,7 +264,7 @@ function Navbar(props) {
 										<Link to={item.path} key={`evaluador_${item.label}`}>
 											<Button
 												sx={{
-													color: location.pathname === item.path ? '#0063F7' : 'black',
+													color: locationForm.pathname === item.path ? '#0063F7' : 'black',
 													padding: 1,
 												}}
 											>
@@ -281,7 +281,7 @@ function Navbar(props) {
 										<Link to={item.path} key={`evaluador_${item.label}`}>
 											<Button
 												sx={{
-													color: location.pathname === item.path ? '#0063F7' : 'black',
+													color: locationForm.pathname === item.path ? '#0063F7' : 'black',
 													padding: 1,
 												}}
 											>
@@ -298,7 +298,7 @@ function Navbar(props) {
 										<Link to={item.path} key={`evaluador_${item.label}`}>
 											<Button
 												sx={{
-													color: location.pathname === item.path ? '#0063F7' : 'black',
+													color: locationForm.pathname === item.path ? '#0063F7' : 'black',
 													padding: 1,
 												}}
 											>
@@ -333,7 +333,7 @@ function Navbar(props) {
 									<MenuItem component={Link} to="/mi-cuenta">
 										<Button
 											sx={{
-												color: location.pathname === '/mi-cuenta' ? '#0063F7' : 'black',
+												color: locationForm.pathname === '/mi-cuenta' ? '#0063F7' : 'black',
 											}}
 										>
 											Mi Cuenta
