@@ -12,6 +12,7 @@ export const LeerToken = () => {
 
 	useEffect(() => {
 		const Verificar = async () => {
+			console.log('FUNCION VERIFICAR');
 			const searchParams = new URLSearchParams(window.location.search);
 			let idToken = searchParams.get('id');
 
