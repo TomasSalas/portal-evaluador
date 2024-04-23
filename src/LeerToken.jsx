@@ -19,6 +19,7 @@ export const LeerToken = () => {
 			if (!idToken) {
 				setOpen(false);
 				window.location.href = 'https://login-mg.vercel.app/';
+				//window.location.href = 'http://localhost:5173/';
 
 				return;
 			}
@@ -62,6 +63,8 @@ export const LeerToken = () => {
 				}
 			} else {
 				window.location.href = 'https://login-mg.vercel.app/';
+				//window.location.href = 'http://localhost:5173/';
+
 				setOpen(false);
 			}
 		};
